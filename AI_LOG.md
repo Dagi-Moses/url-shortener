@@ -7,6 +7,8 @@ This file documents my use of AI tools during this technical screening, as requi
 | Claude | Asked Claude to scaffold the initial project structure: package.json dependencies, folder layout, and the Express entry point | Reviewed all generated code carefully. Removed `helmet` and `cors` packages that Claude included by default: they add complexity without being required by the brief, and I didn't want to ship code I hadn't reasoned through. Kept the dependency list minimal and intentional. |
 | Claude | Asked Claude for the Dockerfile | Accepted the multi-stage build pattern and non-root user setup. Changed the base image from `node:20` to `node:20-alpine` to reduce image size. Added the `HEALTHCHECK` instruction manually since Claude omitted it, and it's directly testable by Docker Compose's `depends_on: condition: service_healthy`. |
 | Claude | Asked Claude to draft the README curl examples section | Accepted the structure but rewrote the "Known Limitations" section entirely. Claude generated generic limitations (e.g. "consider adding authentication") that weren't specific to the architecture decisions I actually made. I replaced these with limitations that are honest about *my* implementation: in-memory rate limiting not being safe for multi-replica deployments, no analytics pruning strategy, etc. |
+| Claude | Asked Claude to generate the single file web UI (HTML/CSS/JS) served by Express| Reviewed the output and verified it correctly called all API endpoints. Chose to keep it as a single file with no dependencies rather than a separate frontend framework, since the brief said the UI was optional and the API was the real deliverable. Added the express.static line to src/index.js myself to wire it up. |
+
 
 
 
